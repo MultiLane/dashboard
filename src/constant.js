@@ -602,7 +602,11 @@ export const api = async (method, path, body) => {
 export const walletLaneContract = () => {
   let provider = new ethers.providers.Web3Provider(window.ethereum);
   let signer = provider.getSigner();
-  return new ethers.Contract(WalletLaneAddress, WalletLaneABI, signer);
+  return new ethers.Contract(
+    window.multilane_address?.[window?.chain_id],
+    WalletLaneABI,
+    signer
+  );
 };
 
 export const usdcContract = () => {
@@ -613,5 +617,16 @@ export const usdcContract = () => {
     "function decimals() public view returns (uint8)",
     "function balanceOf(address _owner) public view returns (uint256 balance)",
   ];
-  return new ethers.Contract(USDCAddress, usdcAbi, signer);
+  return new ethers.Contract(
+    window.usdc_address?.[window?.chain_id],
+    usdcAbi,
+    signer
+  );
+};
+
+export const setChainDetails = async () => {
+  let res = await api("GET", "/api/chain/address/", {});
+  window.usdc_address = res?.usdc;
+  window.multilane_address = res?.multilane;
+  console.log("Set chain details");
 };

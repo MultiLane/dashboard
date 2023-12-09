@@ -8,7 +8,7 @@ import { SidebarContext } from "contexts/SidebarContext";
 import React, { useEffect, useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";
-import { LANDING_PAGE_URL } from "../constant";
+import { LANDING_PAGE_URL, setChainDetails } from "../constant";
 import { ethers } from "ethers";
 
 // Custom Chakra theme
@@ -31,6 +31,8 @@ export default function Dashboard(props) {
       window.ethereum.on("chainChanged", function (chainId) {
         window.location = LANDING_PAGE_URL;
       });
+
+      await setChainDetails()
     };
     blockchainInit();
   }, []);
