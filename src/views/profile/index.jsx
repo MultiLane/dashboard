@@ -46,7 +46,9 @@ export default function Overview() {
       for (let i = 0; i < res.chains.length; i++) {
         let temp = {
           chain: res.chains[i].name,
-          address: res.scw_address[res.chains[i]?.chain_id],
+          address: res.scw_address[res.chains[i]?.chain_id]
+            ? res.scw_address[res.chains[i]?.chain_id]?.address
+            : "",
           chain_id: res.chains[i].chain_id,
         };
         tempScwData.push(temp);
