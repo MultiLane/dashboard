@@ -47,7 +47,7 @@ export default function Overview() {
         let temp = {
           chain: res.chains[i].name,
           address: res.scw_address[res.chains[i]?.chain_id]
-            ? res.scw_address[res.chains[i]?.chain_id]?.address
+            ? res.scw_address[res.chains[i]?.chain_id]
             : "",
           chain_id: res.chains[i].chain_id,
         };
