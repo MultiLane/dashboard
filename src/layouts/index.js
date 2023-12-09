@@ -17,6 +17,7 @@ export default function Dashboard(props) {
     // ensure url has token as query param
     const urlParams = new URLSearchParams(window.location.search);
     if (!urlParams.has("token")) {
+      console.log("reload", LANDING_PAGE_URL);
       window.location = LANDING_PAGE_URL;
     }
     const blockchainInit = async () => {

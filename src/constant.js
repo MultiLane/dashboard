@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-export const LANDING_PAGE_URL = process.env.REACT_APP_LANDING_PAGE_URL;
+export const LANDING_PAGE_URL = process.env.REACT_APP_LANDING_URL;
 export const USDCAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 export const WalletLaneAddress = "";
 export const MailBoxAddress = "";
