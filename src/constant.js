@@ -568,6 +568,9 @@ export const WalletLaneABI = [
 ];
 
 export const USDC_DECIMALS = 6;
+export const roundValue = (value) => {
+  return Math.round(value/1e6);
+};
 export const api = async (method, path, body) => {
   if (method === "GET") {
     // get token from url query param

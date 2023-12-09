@@ -16,7 +16,12 @@ import CustomAlert from "components/alert/alert";
 
 import ComplexTable from "views/components/ComplexTable";
 import { api } from "constant";
-import { walletLaneContract, usdcContract, USDC_DECIMALS } from "constant";
+import {
+  walletLaneContract,
+  usdcContract,
+  USDC_DECIMALS,
+  roundValue,
+} from "constant";
 import { ethers } from "ethers";
 import { splitSignature } from "ethers/lib/utils";
 
@@ -35,7 +40,12 @@ export default function Marketplace() {
       let data = await api("GET", "/api/funds/", {});
       setBalance(data.balance);
       setBill(data.bill);
-      setTableDataComplex(data.fund);
+      let fund = data.fund.map((item) => {
+        let modifiedItem = { ...item };
+        modifiedItem.amount = roundValue(item.amount);
+        return fund
+      });
+      setTableDataComplex(fund);
     };
     fetchData();
   }, []);
@@ -51,7 +61,7 @@ export default function Marketplace() {
     let res = await api("POST", "/api/funds/", {
       amount: String(value),
       type: "Deposit",
-      link: `https://etherscan.io/tx/${tx.hash}`,
+      link: `https://goerli.arbiscan.io/${tx.hash}`,
     });
     if (res.result) {
       setAlertMessage("Deposit success");
@@ -194,7 +204,7 @@ export default function Marketplace() {
                 flexDirection={"column"}
               >
                 <Text fontSize='lg' fontWeight='bold'>
-                  {balance} USDC
+                  {roundValue(balance)} USDC
                 </Text>
                 <Text fontSize='sm' color={"gray.500"}>
                   Available Balance
@@ -256,7 +266,7 @@ export default function Marketplace() {
             >
               <Box textAlign='center' flex={1}>
                 <Text fontSize='lg' fontWeight='bold'>
-                  {bill} USDC
+                  {roundValue(bill)} USDC
                 </Text>
                 <Text fontSize='sm' color={"gray.500"}>
                   Your bill

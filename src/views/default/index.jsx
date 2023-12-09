@@ -4,7 +4,7 @@ import { Box, Icon, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
-import { api } from "constant";
+import { api, roundValue } from "constant";
 import { useEffect, useState } from "react";
 import { MdAttachMoney, MdBarChart } from "react-icons/md";
 import ComplexTable from "views/components/ComplexTable";
@@ -134,7 +134,12 @@ export default function UserReports() {
       let res = await api("GET", "/api/profile", {});
       setBill(res.bill);
       setBalance(res.balance);
-      setTableDataComplex(res.transactions);
+      let transactions = res.transactions.map((item) => {
+        let modifiedItem = { ...item };
+        modifiedItem.amount = roundValue(item.amount);
+        return modifiedItem;
+      });
+      setTableDataComplex(transactions);
       let tempOptions = { ...barChartOptionsDailyTraffic };
       tempOptions.xaxis.categories = res.daily_transaction_key;
       setBarChartOptionsDailyTraffic(tempOptions);
@@ -172,7 +177,7 @@ export default function UserReports() {
             />
           }
           name='Bill for this month'
-          value={`${bill} USDC`}
+          value={`${roundValue(bill)} USDC`}
         />
 
         <MiniStatistics
@@ -187,7 +192,7 @@ export default function UserReports() {
             />
           }
           name='Total balance'
-          value={`${balance} USDC`}
+          value={`${roundValue(balance)} USDC`}
         />
         <MiniStatistics
           startContent={
