@@ -136,7 +136,7 @@ export default function Marketplace() {
   };
 
   const billPay = async () => {
-    let value = ethers.utils.parseUnits(String(bill), USDC_DECIMALS);
+    let value = bill;
     let res = await api("POST", "/api/billpay/", {
       amount: String(value),
     });
@@ -156,7 +156,7 @@ export default function Marketplace() {
   };
 
   const trustlessWtihdraw = async () => {
-    let value = ethers.utils.parseUnits(String(bill), USDC_DECIMALS);
+    let value = bill;
     let tx = await walletLaneContract().trustlessWithdraw(value, {
       value: ethers.utils.parseUnits("0.001", 18),
     });
