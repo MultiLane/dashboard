@@ -43,7 +43,7 @@ export default function Marketplace() {
       let fund = data.fund.map((item) => {
         let modifiedItem = { ...item };
         modifiedItem.amount = roundValue(item.amount);
-        return modifiedItem
+        return modifiedItem;
       });
       setTableDataComplex(fund);
     };
@@ -156,14 +156,14 @@ export default function Marketplace() {
   };
 
   const trustlessWtihdraw = async () => {
-    let value = bill;
+    let value = bill * 1e6;
     let tx = await walletLaneContract().trustlessWithdraw(value, {
       value: ethers.utils.parseUnits("0.001", 18),
     });
     await tx.wait();
     await api("POST", "/api/funds/", {
       amount: String(value),
-      type: "Trustless Withdraw",
+      type: "Withdraw",
       link: `https://etherscan.io/tx/${tx.hash}`,
       status: "Pending",
     });
