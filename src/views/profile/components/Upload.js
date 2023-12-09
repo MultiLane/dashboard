@@ -12,7 +12,7 @@ import Card from "components/card/Card.js";
 import React from "react";
 // Assets
 import { MdUpload } from "react-icons/md";
-import Dropzone from "views/admin/profile/components/Dropzone";
+import Dropzone from "views/profile/components/Dropzone";
 
 export default function Upload(props) {
   const { used, total, ...rest } = props;
@@ -48,7 +48,8 @@ export default function Upload(props) {
             fontWeight='bold'
             textAlign='start'
             fontSize='2xl'
-            mt={{ base: "20px", "2xl": "50px" }}>
+            mt={{ base: "20px", "2xl": "50px" }}
+          >
             Complete your profile
           </Text>
           <Text
@@ -56,7 +57,8 @@ export default function Upload(props) {
             fontSize='md'
             my={{ base: "auto", "2xl": "10px" }}
             mx='auto'
-            textAlign='start'>
+            textAlign='start'
+          >
             Stay on the pulse of distributed projects with an anline whiteboard
             to plan, coordinate and discuss
           </Text>
@@ -68,7 +70,8 @@ export default function Upload(props) {
               minW='140px'
               mt={{ base: "20px", "2xl": "auto" }}
               variant='brand'
-              fontWeight='500'>
+              fontWeight='500'
+            >
               Publish now
             </Button>
           </Flex>

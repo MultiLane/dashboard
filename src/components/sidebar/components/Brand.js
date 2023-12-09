@@ -1,4 +1,5 @@
 import React from "react";
+import { Text } from "@chakra-ui/react";
 
 // Chakra imports
 import { Flex, useColorModeValue } from "@chakra-ui/react";
@@ -13,7 +14,9 @@ export function SidebarBrand() {
 
   return (
     <Flex align='center' direction='column'>
-      <HorizonLogo h='26px' w='175px' my='32px' color={logoColor} />
+      <Text fontSize={"2xl"} mt={"20px"} mb={"20px"} as={"b"}>
+        Wallet Lane
+      </Text>
       <HSeparator mb='20px' />
     </Flex>
   );

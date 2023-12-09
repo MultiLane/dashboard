@@ -44,19 +44,19 @@ import {
   MdBarChart,
   MdFileCopy,
 } from "react-icons/md";
-import CheckTable from "views/admin/default/components/CheckTable";
-import ComplexTable from "views/admin/default/components/ComplexTable";
-import DailyTraffic from "views/admin/default/components/DailyTraffic";
-import PieCard from "views/admin/default/components/PieCard";
-import Tasks from "views/admin/default/components/Tasks";
-import TotalSpent from "views/admin/default/components/TotalSpent";
-import WeeklyRevenue from "views/admin/default/components/WeeklyRevenue";
+import CheckTable from "views/default/components/CheckTable";
+import ComplexTable from "views/default/components/ComplexTable";
+import DailyTraffic from "views/default/components/DailyTraffic";
+import PieCard from "views/default/components/PieCard";
+import Tasks from "views/default/components/Tasks";
+import TotalSpent from "views/default/components/TotalSpent";
+import WeeklyRevenue from "views/default/components/WeeklyRevenue";
 import {
   columnsDataCheck,
   columnsDataComplex,
-} from "views/admin/default/variables/columnsData";
-import tableDataCheck from "views/admin/default/variables/tableDataCheck.json";
-import tableDataComplex from "views/admin/default/variables/tableDataComplex.json";
+} from "views/default/variables/columnsData";
+import tableDataCheck from "views/default/variables/tableDataCheck.json";
+import tableDataComplex from "views/default/variables/tableDataComplex.json";
 
 export default function UserReports() {
   // Chakra Color Mode
@@ -67,7 +67,8 @@ export default function UserReports() {
       <SimpleGrid
         columns={{ base: 1, md: 2, lg: 3, "2xl": 6 }}
         gap='20px'
-        mb='20px'>
+        mb='20px'
+      >
         <MiniStatistics
           startContent={
             <IconBox
@@ -108,7 +109,8 @@ export default function UserReports() {
                 variant='mini'
                 mt='5px'
                 me='0px'
-                defaultValue='usd'>
+                defaultValue='usd'
+              >
                 <option value='usd'>USD</option>
                 <option value='eur'>EUR</option>
                 <option value='gba'>GBA</option>

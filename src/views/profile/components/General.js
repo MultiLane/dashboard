@@ -3,7 +3,7 @@ import { SimpleGrid, Text, useColorModeValue } from "@chakra-ui/react";
 // Custom components
 import Card from "components/card/Card.js";
 import React from "react";
-import Information from "views/admin/profile/components/Information";
+import Information from "views/profile/components/Information";
 
 // Assets
 export default function GeneralInformation(props) {
@@ -22,7 +22,8 @@ export default function GeneralInformation(props) {
         fontWeight='bold'
         fontSize='2xl'
         mt='10px'
-        mb='4px'>
+        mb='4px'
+      >
         General Information
       </Text>
       <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>

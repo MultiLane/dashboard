@@ -40,17 +40,14 @@ export function SidebarLinks(props) {
               }}
               pt='18px'
               pb='12px'
-              key={index}>
+              key={index}
+            >
               {route.name}
             </Text>
             {createLinks(route.items)}
           </>
         );
-      } else if (
-        route.layout === "/admin" ||
-        route.layout === "/auth" ||
-        route.layout === "/rtl"
-      ) {
+      } else {
         return (
           <NavLink key={index} to={route.layout + route.path}>
             {route.icon ? (
@@ -60,7 +57,8 @@ export function SidebarLinks(props) {
                     activeRoute(route.path.toLowerCase()) ? "22px" : "26px"
                   }
                   py='5px'
-                  ps='10px'>
+                  ps='10px'
+                >
                   <Flex w='100%' alignItems='center' justifyContent='center'>
                     <Box
                       color={
@@ -68,7 +66,8 @@ export function SidebarLinks(props) {
                           ? activeIcon
                           : textColor
                       }
-                      me='18px'>
+                      me='18px'
+                    >
                       {route.icon}
                     </Box>
                     <Text
@@ -82,7 +81,8 @@ export function SidebarLinks(props) {
                         activeRoute(route.path.toLowerCase())
                           ? "bold"
                           : "normal"
-                      }>
+                      }
+                    >
                       {route.name}
                     </Text>
                   </Flex>
@@ -105,7 +105,8 @@ export function SidebarLinks(props) {
                     activeRoute(route.path.toLowerCase()) ? "22px" : "26px"
                   }
                   py='5px'
-                  ps='10px'>
+                  ps='10px'
+                >
                   <Text
                     me='auto'
                     color={
@@ -115,7 +116,8 @@ export function SidebarLinks(props) {
                     }
                     fontWeight={
                       activeRoute(route.path.toLowerCase()) ? "bold" : "normal"
-                    }>
+                    }
+                  >
                     {route.name}
                   </Text>
                   <Box h='36px' w='4px' bg='brand.400' borderRadius='5px' />

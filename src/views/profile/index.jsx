@@ -24,12 +24,12 @@
 import { Box, Grid } from "@chakra-ui/react";
 
 // Custom components
-import Banner from "views/admin/profile/components/Banner";
-import General from "views/admin/profile/components/General";
-import Notifications from "views/admin/profile/components/Notifications";
-import Projects from "views/admin/profile/components/Projects";
-import Storage from "views/admin/profile/components/Storage";
-import Upload from "views/admin/profile/components/Upload";
+import Banner from "views/profile/components/Banner";
+import General from "views/profile/components/General";
+import Notifications from "views/profile/components/Notifications";
+import Projects from "views/profile/components/Projects";
+import Storage from "views/profile/components/Storage";
+import Upload from "views/profile/components/Upload";
 
 // Assets
 import banner from "assets/img/auth/banner.png";
@@ -49,7 +49,8 @@ export default function Overview() {
           base: "repeat(3, 1fr)",
           lg: "1fr",
         }}
-        gap={{ base: "20px", xl: "20px" }}>
+        gap={{ base: "20px", xl: "20px" }}
+      >
         <Banner
           gridArea='1 / 1 / 2 / 2'
           banner={banner}
@@ -87,7 +88,8 @@ export default function Overview() {
           lg: "repeat(2, 1fr)",
           "2xl": "1fr",
         }}
-        gap={{ base: "20px", xl: "20px" }}>
+        gap={{ base: "20px", xl: "20px" }}
+      >
         <Projects
           gridArea='1 / 2 / 2 / 2'
           banner={banner}

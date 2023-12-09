@@ -7,7 +7,7 @@ import Project3 from "assets/img/profile/Project3.png";
 // Custom components
 import Card from "components/card/Card.js";
 import React from "react";
-import Project from "views/admin/profile/components/Project";
+import Project from "views/profile/components/Project";
 
 export default function Projects(props) {
   // Chakra Color Mode
@@ -24,7 +24,8 @@ export default function Projects(props) {
         fontWeight='bold'
         fontSize='2xl'
         mt='10px'
-        mb='4px'>
+        mb='4px'
+      >
         All projects
       </Text>
       <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
