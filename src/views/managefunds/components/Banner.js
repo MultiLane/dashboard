@@ -15,7 +15,8 @@ export default function Banner() {
       bgSize='cover'
       py={{ base: "30px", md: "56px" }}
       px={{ base: "30px", md: "64px" }}
-      borderRadius='30px'>
+      borderRadius='30px'
+    >
       <Text
         fontSize={{ base: "24px", md: "34px" }}
         color='white'
@@ -29,7 +30,8 @@ export default function Banner() {
           "3xl": "42%",
         }}
         fontWeight='700'
-        lineHeight={{ base: "32px", md: "42px" }}>
+        lineHeight={{ base: "32px", md: "42px" }}
+      >
         Discover, collect, and sell extraordinary NFTs
       </Text>
       <Text
@@ -45,7 +47,8 @@ export default function Banner() {
         }}
         fontWeight='500'
         mb='40px'
-        lineHeight='28px'>
+        lineHeight='28px'
+      >
         Enter in this creative world. Discover now the latest NFTs or start
         creating your own!
       </Text>
@@ -60,7 +63,8 @@ export default function Banner() {
           fontSize='14px'
           py='20px'
           px='27'
-          me='38px'>
+          me='38px'
+        >
           Discover now
         </Button>
         <Link>

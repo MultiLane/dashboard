@@ -1,100 +1,52 @@
 // Chakra imports
-import { Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import { Button, Flex, Text, Box } from "@chakra-ui/react";
 import Card from "components/card/Card.js";
 // Custom components
 import SwitchField from "components/fields/SwitchField";
-import Menu from "components/menu/MainMenu";
+import { blueColor, blueColorDark, textColorPrimary } from "views/color";
 
 export default function Notifications(props) {
-  const { ...rest } = props;
+  let { ...rest } = props;
+  delete rest.allowAllAddress;
+  delete rest.handleAllowAllAddress;
+  delete rest.handleAllowAllDomain;
+  delete rest.allowAllDomain;
+
   // Chakra Color Mode
-  const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
+
   return (
-    <Card mb="20px" mt="40px" mx="auto" maxW="410px" {...rest}>
-      <Flex align="center" w="100%" justify="space-between" mb="30px">
+    <Card mb='20px' mx='auto' {...rest}>
+      <Flex align='center' w='100%' justify='space-between' mb='30px'>
         <Text
           color={textColorPrimary}
-          fontWeight="bold"
-          fontSize="2xl"
-          mb="4px"
+          fontWeight='bold'
+          fontSize='2xl'
+          mb='4px'
         >
-          Notifications
+          Configurations
         </Text>
-        <Menu />
       </Flex>
       <SwitchField
-        isChecked={true}
-        reversed={true}
-        fontSize="sm"
-        mb="20px"
-        id="1"
-        label="Item update notifications"
+        isChecked={props.allowAllAddress}
+        reversed={false}
+        onChange={(e) => {
+          props.handleAllowAllAddress(e.target.checked);
+        }}
+        fontSize='sm'
+        mb='20px'
+        id='1'
+        label='Allow all addresses'
       />
       <SwitchField
-        reversed={true}
-        fontSize="sm"
-        mb="20px"
-        id="2"
-        label="Item comment notifications"
-      />
-      <SwitchField
-        isChecked={true}
-        reversed={true}
-        fontSize="sm"
-        mb="20px"
-        id="3"
-        label="Buyer review notifications"
-      />
-      <SwitchField
-        isChecked={true}
-        reversed={true}
-        fontSize="sm"
-        mb="20px"
-        id="4"
-        label="Rating reminders notifications"
-      />
-      <SwitchField
-        reversed={true}
-        fontSize="sm"
-        mb="20px"
-        id="5"
-        label="Meetups near you notifications"
-      />
-      <SwitchField
-        reversed={true}
-        fontSize="sm"
-        mb="20px"
-        id="6"
-        label="Company news notifications"
-      />
-      <SwitchField
-        isChecked={true}
-        reversed={true}
-        fontSize="sm"
-        mb="20px"
-        id="7"
-        label="New launches and projects"
-      />
-      <SwitchField
-        reversed={true}
-        fontSize="sm"
-        mb="20px"
-        id="8"
-        label="Monthly product changes"
-      />
-      <SwitchField
-        isChecked={true}
-        reversed={true}
-        fontSize="sm"
-        mb="20px"
-        id="9"
-        label="Subscribe to newsletter"
-      />
-      <SwitchField
-        reversed={true}
-        fontSize="sm"
-        id="10"
-        label="Email me when someone follows me"
+        isChecked={props.allowAllDomain}
+        reversed={false}
+        onChange={(e) => {
+          props.handleAllowAllDomain(e.target.checked);
+        }}
+        fontSize='sm'
+        mb='20px'
+        id='1'
+        label='Allow all websites'
       />
     </Card>
   );

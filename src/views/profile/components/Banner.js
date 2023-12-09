@@ -1,10 +1,24 @@
 // Chakra imports
-import { Avatar, Box, Flex, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Avatar,
+  Box,
+  Flex,
+  Text,
+  useColorModeValue,
+  Input,
+} from "@chakra-ui/react";
 import Card from "components/card/Card.js";
-import React from "react";
+import { useEffect, useState } from "react";
+import { CiEdit } from "react-icons/ci";
+import { MdDownloadDone } from "react-icons/md";
 
 export default function Banner(props) {
-  const { banner, avatar, name, job, posts, followers, following } = props;
+  const { banner, avatar, job, posts, followers, following } = props;
+  const [edit, setEdit] = useState(false);
+  let [name, setName] = useState(props.name);
+  useEffect(() => {
+    setName(props.name);
+  }, [props.name]);
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "gray.400";
@@ -30,38 +44,60 @@ export default function Banner(props) {
         border='4px solid'
         borderColor={borderColor}
       />
-      <Text color={textColorPrimary} fontWeight='bold' fontSize='xl' mt='10px'>
-        {name}
-      </Text>
-      <Text color={textColorSecondary} fontSize='sm'>
+
+      <Flex align='center' alignSelf={"center"} mt={"20px"}>
+        {edit ? (
+          <>
+            <Input
+              size='xl'
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                props.onChange(e.target.value);
+              }}
+            />
+            <MdDownloadDone
+              size='20px'
+              ml='20px'
+              onClick={() => {
+                setEdit(false);
+              }}
+            />
+          </>
+        ) : (
+          <>
+            {name ? (
+              <Text color={textColorPrimary} fontWeight='bold' fontSize='xl'>
+                {name} &nbsp;
+              </Text>
+            ) : (
+              <Text
+                color={textColorPrimary}
+                fontWeight={"bold"}
+                fontSize={"xl"}
+              >
+                Enter your name
+              </Text>
+            )}
+
+            <CiEdit
+              size='20px'
+              ml='20px'
+              onClick={() => {
+                setEdit(true);
+              }}
+            />
+          </>
+        )}
+      </Flex>
+
+      <Text
+        color={textColorSecondary}
+        fontSize='sm'
+        fontWeight={name ? "" : "bold"}
+      >
         {job}
       </Text>
-      <Flex w='max-content' mx='auto' mt='26px'>
-        <Flex mx='auto' me='60px' align='center' direction='column'>
-          <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-            {posts}
-          </Text>
-          <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
-            Posts
-          </Text>
-        </Flex>
-        <Flex mx='auto' me='60px' align='center' direction='column'>
-          <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-            {followers}
-          </Text>
-          <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
-            Followers
-          </Text>
-        </Flex>
-        <Flex mx='auto' align='center' direction='column'>
-          <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-            {following}
-          </Text>
-          <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
-            Following
-          </Text>
-        </Flex>
-      </Flex>
     </Card>
   );
 }
