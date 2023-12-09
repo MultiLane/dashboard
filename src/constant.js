@@ -628,5 +628,8 @@ export const setChainDetails = async () => {
   let res = await api("GET", "/api/chain/address/", {});
   window.usdc_address = res?.usdc;
   window.multilane_address = res?.multilane;
+  window.chain_id = parseInt(
+    await window.ethereum.request({ method: "eth_chainId" })
+  );
   console.log("Set chain details");
 };
