@@ -1,26 +1,23 @@
 [
   {
-    "name":"Horizon UI PRO",
+    "chain": "Ethereum",
     "status": "Approved",
     "date": "18 Apr 2022",
-    "progress": 75.5  
+    "amount": "6 USDC",
+    "link": "https://etherscan.io/tx/0xea933ef030e54ba9197a71a0c12b7ae3e6f4509514b283e7c5d207ecd3b45884"
   },
   {
-    "name":"Horizon UI Free",
-    "status": "Disable",
+    "chain": "Arbitrum",
+    "status": "Rejected",
+    "amount": "10 USDC",
     "date": "18 Apr 2022",
-    "progress": 25.5  
+    "link": "https://etherscan.io/tx/0xea933ef030e54ba9197a71a0c12b7ae3e6f4509514b283e7c5d207ecd3b45884"
   },
   {
-    "name":"Marketplace",
-    "status": "Error",
-    "date": "20 May 2021",
-    "progress": 90  
-  },
-  {
-    "name":"Weekly Updates",
-    "status": "Approved",
-    "date": "12 Jul 2021",
-    "progress": 50.5  
+    "chain": "Ethereum",
+    "status": "Pending",
+    "date": "18 Apr 2022",
+    "amount": "6 USDC",
+    "link": "https://etherscan.io/tx/0xea933ef030e54ba9197a71a0c12b7ae3e6f4509514b283e7c5d207ecd3b45884"
   }
 ]

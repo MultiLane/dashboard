@@ -1,64 +1,155 @@
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| 
- | |_| | | | | |_) || |  / / | | |  \| | | | | || | 
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___|
-                                                                                                                                                                                                                                                                                                                                       
-=========================================================
-* Horizon UI - v1.1.0
-=========================================================
-
-* Product Page: https://www.horizon-ui.com/
-* Copyright 2023 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 // Chakra imports
-import {
-  Avatar,
-  Box,
-  Flex,
-  FormLabel,
-  Icon,
-  Select,
-  SimpleGrid,
-  useColorModeValue,
-} from "@chakra-ui/react";
-// Assets
-import Usa from "assets/img/dashboards/usa.png";
+import { Box, Icon, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
+
 // Custom components
-import MiniCalendar from "components/calendar/MiniCalendar";
 import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
-import React from "react";
-import {
-  MdAddTask,
-  MdAttachMoney,
-  MdBarChart,
-  MdFileCopy,
-} from "react-icons/md";
-import CheckTable from "views/default/components/CheckTable";
-import ComplexTable from "views/default/components/ComplexTable";
+import { api } from "constant";
+import { useEffect, useState } from "react";
+import { MdAttachMoney, MdBarChart } from "react-icons/md";
+import ComplexTable from "views/components/ComplexTable";
 import DailyTraffic from "views/default/components/DailyTraffic";
 import PieCard from "views/default/components/PieCard";
-import Tasks from "views/default/components/Tasks";
-import TotalSpent from "views/default/components/TotalSpent";
-import WeeklyRevenue from "views/default/components/WeeklyRevenue";
-import {
-  columnsDataCheck,
-  columnsDataComplex,
-} from "views/default/variables/columnsData";
-import tableDataCheck from "views/default/variables/tableDataCheck.json";
-import tableDataComplex from "views/default/variables/tableDataComplex.json";
+import { columnsDataComplex } from "views/default/variables/columnsData";
+
+const defaultBarChartDataDailyTraffic = [
+  {
+    name: "Daily Transaction",
+    data: [0, 0, 0, 0, 0, 0, 0],
+  },
+];
+
+export const defaultBarChartOptionsDailyTraffic = {
+  chart: {
+    toolbar: {
+      show: false,
+    },
+  },
+  tooltip: {
+    style: {
+      fontSize: "12px",
+      fontFamily: undefined,
+    },
+    onDatasetHover: {
+      style: {
+        fontSize: "12px",
+        fontFamily: undefined,
+      },
+    },
+    theme: "dark",
+  },
+  xaxis: {
+    categories: ["00", "04", "08", "12", "14", "16", "18"],
+    show: false,
+    labels: {
+      show: true,
+      style: {
+        colors: "#A3AED0",
+        fontSize: "14px",
+        fontWeight: "500",
+      },
+    },
+    axisBorder: {
+      show: false,
+    },
+    axisTicks: {
+      show: false,
+    },
+  },
+  yaxis: {
+    show: false,
+    color: "black",
+    labels: {
+      show: true,
+      style: {
+        colors: "#CBD5E0",
+        fontSize: "14px",
+      },
+    },
+  },
+  grid: {
+    show: false,
+    strokeDashArray: 5,
+    yaxis: {
+      lines: {
+        show: true,
+      },
+    },
+    xaxis: {
+      lines: {
+        show: false,
+      },
+    },
+  },
+  fill: {
+    type: "gradient",
+    gradient: {
+      type: "vertical",
+      shadeIntensity: 1,
+      opacityFrom: 0.7,
+      opacityTo: 0.9,
+      colorStops: [
+        [
+          {
+            offset: 0,
+            color: "#4318FF",
+            opacity: 1,
+          },
+          {
+            offset: 100,
+            color: "rgba(67, 24, 255, 1)",
+            opacity: 0.28,
+          },
+        ],
+      ],
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  plotOptions: {
+    bar: {
+      borderRadius: 10,
+      columnWidth: "40px",
+    },
+  },
+};
 
 export default function UserReports() {
+  const [bill, setBill] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [tableDataComplex, setTableDataComplex] = useState([]);
+  const [average, setAverage] = useState(0);
+  const [barChartDataDailyTraffic, setBarChartDataDailyTraffic] = useState(
+    defaultBarChartDataDailyTraffic
+  );
+  const [barChartOptionsDailyTraffic, setBarChartOptionsDailyTraffic] =
+    useState(defaultBarChartOptionsDailyTraffic);
+
+  const [pieChartData, setPieChartData] = useState([]);
+
+  // run code after the component is mounted
+  useEffect(() => {
+    let profileData = async () => {
+      let res = await api("GET", "/api/profile", {});
+      setBill(res.bill);
+      setBalance(res.balance);
+      setTableDataComplex(res.transactions);
+      let tempOptions = { ...barChartOptionsDailyTraffic };
+      tempOptions.xaxis.categories = res.daily_transaction_key;
+      setBarChartOptionsDailyTraffic(tempOptions);
+      setBarChartDataDailyTraffic([
+        {
+          name: "Daily Transaction",
+          data: res.daily_transaction_value,
+        },
+      ]);
+      setPieChartData(res.chain_distribution);
+      setAverage(res.average);
+    };
+    profileData();
+  }, []);
+
   // Chakra Color Mode
   const brandColor = useColorModeValue("brand.500", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
@@ -76,13 +167,14 @@ export default function UserReports() {
               h='56px'
               bg={boxBg}
               icon={
-                <Icon w='32px' h='32px' as={MdBarChart} color={brandColor} />
+                <Icon w='32px' h='32px' as={MdAttachMoney} color={brandColor} />
               }
             />
           }
-          name='Earnings'
-          value='$350.4'
+          name='Bill for this month'
+          value={`${bill} USDC`}
         />
+
         <MiniStatistics
           startContent={
             <IconBox
@@ -94,43 +186,8 @@ export default function UserReports() {
               }
             />
           }
-          name='Spend this month'
-          value='$642.39'
-        />
-        <MiniStatistics growth='+23%' name='Sales' value='$574.34' />
-        <MiniStatistics
-          endContent={
-            <Flex me='-16px' mt='10px'>
-              <FormLabel htmlFor='balance'>
-                <Avatar src={Usa} />
-              </FormLabel>
-              <Select
-                id='balance'
-                variant='mini'
-                mt='5px'
-                me='0px'
-                defaultValue='usd'
-              >
-                <option value='usd'>USD</option>
-                <option value='eur'>EUR</option>
-                <option value='gba'>GBA</option>
-              </Select>
-            </Flex>
-          }
-          name='Your balance'
-          value='$1,000'
-        />
-        <MiniStatistics
-          startContent={
-            <IconBox
-              w='56px'
-              h='56px'
-              bg='linear-gradient(90deg, #4481EB 0%, #04BEFE 100%)'
-              icon={<Icon w='28px' h='28px' as={MdAddTask} color='white' />}
-            />
-          }
-          name='New Tasks'
-          value='154'
+          name='Total balance'
+          value={`${balance} USDC`}
         />
         <MiniStatistics
           startContent={
@@ -139,34 +196,28 @@ export default function UserReports() {
               h='56px'
               bg={boxBg}
               icon={
-                <Icon w='32px' h='32px' as={MdFileCopy} color={brandColor} />
+                <Icon w='32px' h='32px' as={MdBarChart} color={brandColor} />
               }
             />
           }
-          name='Total Projects'
-          value='2935'
+          name='Transaction count'
+          value={tableDataComplex.length ? tableDataComplex.length : 0}
         />
       </SimpleGrid>
 
-      <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px' mb='20px'>
-        <TotalSpent />
-        <WeeklyRevenue />
-      </SimpleGrid>
-      <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
-        <CheckTable columnsData={columnsDataCheck} tableData={tableDataCheck} />
-        <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
-          <DailyTraffic />
-          <PieCard />
-        </SimpleGrid>
-      </SimpleGrid>
-      <SimpleGrid columns={{ base: 1, md: 1, xl: 2 }} gap='20px' mb='20px'>
+      <SimpleGrid columns={{ base: 1, md: 1, xl: 1 }} gap='20px' mb='20px'>
         <ComplexTable
           columnsData={columnsDataComplex}
           tableData={tableDataComplex}
+          name='Transactions'
         />
         <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
-          <Tasks />
-          <MiniCalendar h='100%' minW='100%' selectRange={false} />
+          <DailyTraffic
+            average={average}
+            barChartDataDailyTraffic={barChartDataDailyTraffic}
+            barChartOptionsDailyTraffic={barChartOptionsDailyTraffic}
+          />
+          <PieCard pieChartData={pieChartData} />
         </SimpleGrid>
       </SimpleGrid>
     </Box>
