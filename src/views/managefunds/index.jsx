@@ -43,7 +43,7 @@ export default function Marketplace() {
       let fund = data.fund.map((item) => {
         let modifiedItem = { ...item };
         modifiedItem.amount = roundValue(item.amount);
-        return fund
+        return modifiedItem
       });
       setTableDataComplex(fund);
     };
