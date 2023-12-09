@@ -217,11 +217,16 @@ export default function UserReports() {
           name='Transactions'
         />
         <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap='20px'>
-          <DailyTraffic
-            average={average}
-            barChartDataDailyTraffic={barChartDataDailyTraffic}
-            barChartOptionsDailyTraffic={barChartOptionsDailyTraffic}
-          />
+          {average ? (
+            <DailyTraffic
+              average={average}
+              barChartDataDailyTraffic={barChartDataDailyTraffic}
+              barChartOptionsDailyTraffic={barChartOptionsDailyTraffic}
+            />
+          ) : (
+            <></>
+          )}
+
           <PieCard pieChartData={pieChartData} />
         </SimpleGrid>
       </SimpleGrid>
