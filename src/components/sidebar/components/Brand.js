@@ -15,7 +15,7 @@ export function SidebarBrand() {
   return (
     <Flex align='center' direction='column'>
       <Text fontSize={"2xl"} mt={"20px"} mb={"20px"} as={"b"}>
-        Mutlilane
+        Multilane
       </Text>
       <HSeparator mb='20px' />
     </Flex>
