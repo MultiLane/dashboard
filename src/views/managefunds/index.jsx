@@ -61,7 +61,7 @@ export default function Marketplace() {
     let res = await api("POST", "/api/funds/", {
       amount: String(value),
       type: "Deposit",
-      link: `https://goerli.arbiscan.io/${tx.hash}`,
+      link: `https://goerli.arbiscan.io/tx/${tx.hash}`,
     });
     if (res.result) {
       setAlertMessage("Deposit success");
