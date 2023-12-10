@@ -28,9 +28,9 @@ export default function Dashboard(props) {
         window.location = LANDING_PAGE_URL;
       });
 
-      window.ethereum.on("chainChanged", function (chainId) {
-        window.location = LANDING_PAGE_URL;
-      });
+      // window.ethereum.on("chainChanged", function (chainId) {
+      //   window.location = LANDING_PAGE_URL;
+      // });
 
       await setChainDetails()
     };
